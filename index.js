@@ -67,6 +67,17 @@ app.post("/post", (req, res) => {
 });
 
 // DELETE by req params id
+app.delete("/delete/:id", (req, res) => {
+    const parameter = req.params.id
+    const query = `DELETE FROM ${mysql_table} WHERE id=?`
+
+    db.query(query, parameter, (err, result) => {
+        if(err) {process.exit(1)};
+
+        console.log(result)
+        res.send("Deleted!")
+    })
+});
 
 
 app.listen(PORT, () => {
